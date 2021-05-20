@@ -44,7 +44,7 @@ namespace TimeManagementSystem
 
             using (SqlConnection con = new SqlConnection(connString))
             {
-                using (SqlCommand cmd = new SqlCommand("Select * from session", con))
+                using (SqlCommand cmd = new SqlCommand("Select * from Session", con))
                 {
                     con.Open();
 
@@ -82,8 +82,9 @@ namespace TimeManagementSystem
                 return;
             }
 
+            string connString = Classes.ConnectionStrings.TimeTableSystem;
 
-            string connString = ConfigurationManager.ConnectionStrings["connstrng"].ConnectionString;
+           // string connString = ConfigurationManager.ConnectionStrings["connstrng"].ConnectionString;
             SqlConnection sqlconn = new SqlConnection(connString);
 
 
@@ -108,7 +109,7 @@ INSERT INTO sessionCat
            (LecID, Lecture1, Lecture2, SubjectCode, SubjectName
            , GroupID, Tag, NoOfStudent, Duration, Type, SessionID)
  select id,[Lecture1],[Lecture2],[SubjectCode],[SubjectName]
-      ,[GroupID],[Tag],[NoOfStudent],[Duration],'{typename}',@id from session where id in ({String.Join(",", ids)})
+      ,[GroupID],[Tag],[NoOfStudent],[Duration],'{typename}',@id from Session where id in ({String.Join(",", ids)})
    
     select 'Insert success' [msg]
 end";

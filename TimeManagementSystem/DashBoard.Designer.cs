@@ -32,6 +32,7 @@ namespace TimeManagementSystem
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashBoard));
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.button2 = new System.Windows.Forms.Button();
             this.btnStudent = new System.Windows.Forms.Button();
             this.btnTb = new System.Windows.Forms.Button();
             this.btnStatistic = new System.Windows.Forms.Button();
@@ -51,6 +52,8 @@ namespace TimeManagementSystem
             this.lblDash = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.dashboardImageUC1 = new TimeManagementSystem.DashboardImageUC();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -67,14 +70,16 @@ namespace TimeManagementSystem
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(162, 542);
+            this.panel2.Size = new System.Drawing.Size(162, 736);
             this.panel2.TabIndex = 1;
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.button3, 0, 12);
+            this.tableLayoutPanel1.Controls.Add(this.button1, 0, 11);
+            this.tableLayoutPanel1.Controls.Add(this.button2, 0, 10);
             this.tableLayoutPanel1.Controls.Add(this.btnStudent, 0, 9);
             this.tableLayoutPanel1.Controls.Add(this.btnTb, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.btnStatistic, 0, 7);
@@ -88,19 +93,37 @@ namespace TimeManagementSystem
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 72);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 10;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(162, 470);
+            this.tableLayoutPanel1.RowCount = 12;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(162, 664);
             this.tableLayoutPanel1.TabIndex = 3;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.White;
+            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Century", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.Black;
+            this.button2.Location = new System.Drawing.Point(3, 493);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(156, 43);
+            this.button2.TabIndex = 25;
+            this.button2.Text = "pukauka";
+            this.button2.UseVisualStyleBackColor = false;
             // 
             // btnStudent
             // 
@@ -110,9 +133,9 @@ namespace TimeManagementSystem
             this.btnStudent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStudent.Font = new System.Drawing.Font("Century", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStudent.ForeColor = System.Drawing.Color.Black;
-            this.btnStudent.Location = new System.Drawing.Point(3, 426);
+            this.btnStudent.Location = new System.Drawing.Point(3, 444);
             this.btnStudent.Name = "btnStudent";
-            this.btnStudent.Size = new System.Drawing.Size(156, 41);
+            this.btnStudent.Size = new System.Drawing.Size(156, 43);
             this.btnStudent.TabIndex = 12;
             this.btnStudent.Text = "Student";
             this.btnStudent.UseVisualStyleBackColor = false;
@@ -126,9 +149,9 @@ namespace TimeManagementSystem
             this.btnTb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTb.Font = new System.Drawing.Font("Century", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTb.ForeColor = System.Drawing.Color.Black;
-            this.btnTb.Location = new System.Drawing.Point(3, 379);
+            this.btnTb.Location = new System.Drawing.Point(3, 395);
             this.btnTb.Name = "btnTb";
-            this.btnTb.Size = new System.Drawing.Size(156, 41);
+            this.btnTb.Size = new System.Drawing.Size(156, 43);
             this.btnTb.TabIndex = 11;
             this.btnTb.Text = "Time Table";
             this.btnTb.UseVisualStyleBackColor = false;
@@ -141,9 +164,9 @@ namespace TimeManagementSystem
             this.btnStatistic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStatistic.Font = new System.Drawing.Font("Century", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStatistic.ForeColor = System.Drawing.Color.Black;
-            this.btnStatistic.Location = new System.Drawing.Point(3, 332);
+            this.btnStatistic.Location = new System.Drawing.Point(3, 346);
             this.btnStatistic.Name = "btnStatistic";
-            this.btnStatistic.Size = new System.Drawing.Size(156, 41);
+            this.btnStatistic.Size = new System.Drawing.Size(156, 43);
             this.btnStatistic.TabIndex = 10;
             this.btnStatistic.Text = "Statistic Table";
             this.btnStatistic.UseVisualStyleBackColor = false;
@@ -156,12 +179,13 @@ namespace TimeManagementSystem
             this.btnLocation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLocation.Font = new System.Drawing.Font("Century", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLocation.ForeColor = System.Drawing.Color.Black;
-            this.btnLocation.Location = new System.Drawing.Point(3, 285);
+            this.btnLocation.Location = new System.Drawing.Point(3, 297);
             this.btnLocation.Name = "btnLocation";
-            this.btnLocation.Size = new System.Drawing.Size(156, 41);
+            this.btnLocation.Size = new System.Drawing.Size(156, 43);
             this.btnLocation.TabIndex = 9;
             this.btnLocation.Text = "Location";
             this.btnLocation.UseVisualStyleBackColor = false;
+            this.btnLocation.Click += new System.EventHandler(this.btnLocation_Click);
             // 
             // btnworking
             // 
@@ -171,9 +195,9 @@ namespace TimeManagementSystem
             this.btnworking.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnworking.Font = new System.Drawing.Font("Century", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnworking.ForeColor = System.Drawing.Color.Black;
-            this.btnworking.Location = new System.Drawing.Point(3, 238);
+            this.btnworking.Location = new System.Drawing.Point(3, 248);
             this.btnworking.Name = "btnworking";
-            this.btnworking.Size = new System.Drawing.Size(156, 41);
+            this.btnworking.Size = new System.Drawing.Size(156, 43);
             this.btnworking.TabIndex = 8;
             this.btnworking.Text = "Working Days";
             this.btnworking.UseVisualStyleBackColor = false;
@@ -187,9 +211,9 @@ namespace TimeManagementSystem
             this.btnTag.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTag.Font = new System.Drawing.Font("Century", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTag.ForeColor = System.Drawing.Color.Black;
-            this.btnTag.Location = new System.Drawing.Point(3, 191);
+            this.btnTag.Location = new System.Drawing.Point(3, 199);
             this.btnTag.Name = "btnTag";
-            this.btnTag.Size = new System.Drawing.Size(156, 41);
+            this.btnTag.Size = new System.Drawing.Size(156, 43);
             this.btnTag.TabIndex = 7;
             this.btnTag.Text = "Tag";
             this.btnTag.UseVisualStyleBackColor = false;
@@ -203,9 +227,9 @@ namespace TimeManagementSystem
             this.btnSeesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSeesion.Font = new System.Drawing.Font("Century", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSeesion.ForeColor = System.Drawing.Color.Black;
-            this.btnSeesion.Location = new System.Drawing.Point(3, 144);
+            this.btnSeesion.Location = new System.Drawing.Point(3, 150);
             this.btnSeesion.Name = "btnSeesion";
-            this.btnSeesion.Size = new System.Drawing.Size(156, 41);
+            this.btnSeesion.Size = new System.Drawing.Size(156, 43);
             this.btnSeesion.TabIndex = 6;
             this.btnSeesion.Text = "Session";
             this.btnSeesion.UseVisualStyleBackColor = false;
@@ -219,9 +243,9 @@ namespace TimeManagementSystem
             this.btnSubject.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubject.Font = new System.Drawing.Font("Century", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubject.ForeColor = System.Drawing.Color.Black;
-            this.btnSubject.Location = new System.Drawing.Point(3, 97);
+            this.btnSubject.Location = new System.Drawing.Point(3, 101);
             this.btnSubject.Name = "btnSubject";
-            this.btnSubject.Size = new System.Drawing.Size(156, 41);
+            this.btnSubject.Size = new System.Drawing.Size(156, 43);
             this.btnSubject.TabIndex = 5;
             this.btnSubject.Text = "Subject";
             this.btnSubject.UseVisualStyleBackColor = false;
@@ -235,9 +259,9 @@ namespace TimeManagementSystem
             this.btnLecturer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLecturer.Font = new System.Drawing.Font("Century", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLecturer.ForeColor = System.Drawing.Color.Black;
-            this.btnLecturer.Location = new System.Drawing.Point(3, 50);
+            this.btnLecturer.Location = new System.Drawing.Point(3, 52);
             this.btnLecturer.Name = "btnLecturer";
-            this.btnLecturer.Size = new System.Drawing.Size(156, 41);
+            this.btnLecturer.Size = new System.Drawing.Size(156, 43);
             this.btnLecturer.TabIndex = 4;
             this.btnLecturer.Text = "Lecturer";
             this.btnLecturer.UseVisualStyleBackColor = false;
@@ -253,7 +277,7 @@ namespace TimeManagementSystem
             this.btnDashboard.ForeColor = System.Drawing.Color.Black;
             this.btnDashboard.Location = new System.Drawing.Point(3, 3);
             this.btnDashboard.Name = "btnDashboard";
-            this.btnDashboard.Size = new System.Drawing.Size(156, 41);
+            this.btnDashboard.Size = new System.Drawing.Size(156, 43);
             this.btnDashboard.TabIndex = 3;
             this.btnDashboard.Text = "Dashboard";
             this.btnDashboard.UseVisualStyleBackColor = false;
@@ -287,7 +311,7 @@ namespace TimeManagementSystem
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(162, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(769, 22);
+            this.panel1.Size = new System.Drawing.Size(773, 22);
             this.panel1.TabIndex = 2;
             // 
             // btnMaximize
@@ -348,9 +372,9 @@ namespace TimeManagementSystem
             // 
             this.panel4.Controls.Add(this.dashboardImageUC1);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(162, 52);
+            this.panel4.Location = new System.Drawing.Point(162, 246);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(769, 490);
+            this.panel4.Size = new System.Drawing.Size(773, 490);
             this.panel4.TabIndex = 4;
             // 
             // dashboardImageUC1
@@ -358,13 +382,42 @@ namespace TimeManagementSystem
             this.dashboardImageUC1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dashboardImageUC1.Location = new System.Drawing.Point(0, 0);
             this.dashboardImageUC1.Name = "dashboardImageUC1";
-            this.dashboardImageUC1.Size = new System.Drawing.Size(769, 490);
+            this.dashboardImageUC1.Size = new System.Drawing.Size(773, 490);
             this.dashboardImageUC1.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.White;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Century", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.Location = new System.Drawing.Point(3, 542);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(156, 32);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "Student";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.White;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Century", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.ForeColor = System.Drawing.Color.Black;
+            this.button3.Location = new System.Drawing.Point(3, 580);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(156, 30);
+            this.button3.TabIndex = 26;
+            this.button3.Text = "Student";
+            this.button3.UseVisualStyleBackColor = false;
             // 
             // DashBoard
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(931, 542);
+            this.ClientSize = new System.Drawing.Size(935, 736);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.lblDash);
             this.Controls.Add(this.panel1);
@@ -398,7 +451,6 @@ namespace TimeManagementSystem
         private System.Windows.Forms.Button btnSeesion;
         private System.Windows.Forms.Button btnSubject;
         private System.Windows.Forms.Button btnLecturer;
-        private System.Windows.Forms.Button btnDashboard;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -408,5 +460,9 @@ namespace TimeManagementSystem
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnMaximize;
         private System.Windows.Forms.Button btnMinimize;
+        private System.Windows.Forms.Button btnDashboard;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }

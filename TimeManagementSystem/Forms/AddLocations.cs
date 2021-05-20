@@ -104,5 +104,11 @@ namespace TimeManagementSystem
         {
 
         }
+
+        private void btnManage_Click(object sender, EventArgs e)
+        {
+            ManageLocations M = new ManageLocations();
+            M.Show();
+        }
     }
 }

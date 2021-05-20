@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TimeManagementSystem.Forms;
 
 namespace TimeManagementSystem
 {
@@ -31,7 +32,7 @@ namespace TimeManagementSystem
 
         private void btnSeesion_Click(object sender, EventArgs e)
         {
-            Session S = new Session();
+            SessionMenu S = new SessionMenu();
             S.Show();
         }
 
@@ -67,6 +68,17 @@ namespace TimeManagementSystem
         {
             Tags t = new Tags();
             t.Show();
+        }
+
+        private void btnLocation_Click(object sender, EventArgs e)
+        {
+            AddLocations AL = new AddLocations();
+            AL.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

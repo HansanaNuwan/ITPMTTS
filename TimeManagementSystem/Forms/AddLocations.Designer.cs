@@ -42,13 +42,14 @@
             this.rbtLaboratory = new System.Windows.Forms.RadioButton();
             this.rbtLectureHall = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnManage = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtCapacity
             // 
             this.txtCapacity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCapacity.Location = new System.Drawing.Point(230, 392);
-            this.txtCapacity.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCapacity.Margin = new System.Windows.Forms.Padding(2);
             this.txtCapacity.Name = "txtCapacity";
             this.txtCapacity.Size = new System.Drawing.Size(326, 23);
             this.txtCapacity.TabIndex = 28;
@@ -57,7 +58,7 @@
             // 
             this.txtRoomName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRoomName.Location = new System.Drawing.Point(230, 231);
-            this.txtRoomName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtRoomName.Margin = new System.Windows.Forms.Padding(2);
             this.txtRoomName.Name = "txtRoomName";
             this.txtRoomName.Size = new System.Drawing.Size(326, 23);
             this.txtRoomName.TabIndex = 27;
@@ -66,7 +67,7 @@
             // 
             this.txtBuildingName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBuildingName.Location = new System.Drawing.Point(230, 156);
-            this.txtBuildingName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBuildingName.Margin = new System.Windows.Forms.Padding(2);
             this.txtBuildingName.Name = "txtBuildingName";
             this.txtBuildingName.Size = new System.Drawing.Size(326, 23);
             this.txtBuildingName.TabIndex = 26;
@@ -76,8 +77,8 @@
             this.btnSave.BackColor = System.Drawing.Color.LightGray;
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.LightSeaGreen;
-            this.btnSave.Location = new System.Drawing.Point(440, 470);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSave.Location = new System.Drawing.Point(304, 470);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(114, 35);
             this.btnSave.TabIndex = 25;
@@ -90,8 +91,8 @@
             this.btnClear.BackColor = System.Drawing.Color.LightGray;
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.ForeColor = System.Drawing.Color.LightSeaGreen;
-            this.btnClear.Location = new System.Drawing.Point(230, 470);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnClear.Location = new System.Drawing.Point(158, 470);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(110, 35);
             this.btnClear.TabIndex = 24;
@@ -171,7 +172,7 @@
             this.rbtLaboratory.AutoSize = true;
             this.rbtLaboratory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbtLaboratory.Location = new System.Drawing.Point(230, 340);
-            this.rbtLaboratory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbtLaboratory.Margin = new System.Windows.Forms.Padding(2);
             this.rbtLaboratory.Name = "rbtLaboratory";
             this.rbtLaboratory.Size = new System.Drawing.Size(107, 22);
             this.rbtLaboratory.TabIndex = 16;
@@ -185,7 +186,7 @@
             this.rbtLectureHall.Checked = true;
             this.rbtLectureHall.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbtLectureHall.Location = new System.Drawing.Point(230, 302);
-            this.rbtLectureHall.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbtLectureHall.Margin = new System.Windows.Forms.Padding(2);
             this.rbtLectureHall.Name = "rbtLectureHall";
             this.rbtLectureHall.Size = new System.Drawing.Size(116, 22);
             this.rbtLectureHall.TabIndex = 15;
@@ -197,17 +198,32 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.LightSeaGreen;
             this.panel1.Location = new System.Drawing.Point(-1, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(649, 69);
             this.panel1.TabIndex = 32;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // btnManage
+            // 
+            this.btnManage.BackColor = System.Drawing.Color.LightGray;
+            this.btnManage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnManage.ForeColor = System.Drawing.Color.LightSeaGreen;
+            this.btnManage.Location = new System.Drawing.Point(442, 470);
+            this.btnManage.Margin = new System.Windows.Forms.Padding(2);
+            this.btnManage.Name = "btnManage";
+            this.btnManage.Size = new System.Drawing.Size(162, 35);
+            this.btnManage.TabIndex = 33;
+            this.btnManage.Text = "Manage Locations";
+            this.btnManage.UseVisualStyleBackColor = false;
+            this.btnManage.Click += new System.EventHandler(this.btnManage_Click);
             // 
             // AddLocations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(644, 547);
+            this.Controls.Add(this.btnManage);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.txtCapacity);
@@ -222,7 +238,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.rbtLaboratory);
             this.Controls.Add(this.rbtLectureHall);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AddLocations";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
@@ -247,6 +263,7 @@
         private System.Windows.Forms.RadioButton rbtLaboratory;
         private System.Windows.Forms.RadioButton rbtLectureHall;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnManage;
     }
 }
 

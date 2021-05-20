@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace TimeManagementSystem.CRUD
 {
     class LectureClass
@@ -75,6 +76,8 @@ namespace TimeManagementSystem.CRUD
         //insertign Data into database
         public bool InsertLecturer(LectureClass L)
         {
+            string myconnstrng = Classes.ConnectionStrings.TimeTableSystem;
+
             //creating a default return type and setting its value to false
             bool isSuccess = false;
 

@@ -76,9 +76,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\SessionMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SessionMenu.Designer.cs">
+      <DependentUpon>SessionMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\WokingDaysHors.cs">
       <SubType>Form</SubType>
     </Compile>
+    <EmbeddedResource Include="Forms\SessionMenu.resx">
+      <DependentUpon>SessionMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\WokingDaysHors.resx">
       <DependentUpon>WokingDaysHors.cs</DependentUpon>
     </EmbeddedResource>
