@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.SQLite;
 using System.Windows.Forms;
 
 namespace TimeManagementSystem
@@ -42,13 +42,13 @@ namespace TimeManagementSystem
 
             string connString = Classes.ConnectionStrings.TimeTableSystem; 
 
-            using (SqlConnection con = new SqlConnection(connString))
+            using (SQLiteConnection con = new Classes.SqliteHelper().GetSQLiteConnection())
             {
-                using (SqlCommand cmd = new SqlCommand("Select * from Session", con))
+                using (SQLiteCommand cmd = new SQLiteCommand("Select * from Session", con))
                 {
                     con.Open();
 
-                    SqlDataReader reader = cmd.ExecuteReader();
+                    SQLiteDataReader reader = cmd.ExecuteReader();
 
                     dt.Load(reader);
                 }
@@ -84,73 +84,99 @@ namespace TimeManagementSystem
 
             string connString = Classes.ConnectionStrings.TimeTableSystem;
 
-           // string connString = ConfigurationManager.ConnectionStrings["connstrng"].ConnectionString;
-            SqlConnection sqlconn = new SqlConnection(connString);
+            // string connString = ConfigurationManager.ConnectionStrings["connstrng"].ConnectionString;
+            SQLiteConnection sqlconn = new Classes.SqliteHelper().GetSQLiteConnection();
+            SQLiteConnection sqlconn2 = new Classes.SqliteHelper().GetSQLiteConnection();
 
 
 
             try
             {
-                String sqlquery = $@"
-if exists(select * from  sessionCat where LecID in ({String.Join(",", ids)}))
-begin
-    select 'Duplicate data' [msg]
-end
-else
-begin
+                sqlconn.Open();
 
+                String q1 = $"select * from  sessionCat where LecID in ({String.Join(",", ids)})";
+                using (SQLiteCommand sqlcomm1 = new SQLiteCommand(q1, sqlconn))
+                {
+                    using (SQLiteDataReader rdr = sqlcomm1.ExecuteReader())
+                        if (rdr.Read())
+                        {
+                            statusLable.Text = "Duplicate data";
+                            return;
+                        }
+                }
 
-declare @id varchar(10)
+                String newid = "";
+                String q2 = $@"
+select idChar,  CAST(incremnt as varchar) [newid] from idNumbers where idChar = 'S';
+update idNumbers set incremnt = incremnt + 1 where idChar = 'S';";
+                using (SQLiteCommand sqlcomm2 = new SQLiteCommand(q2, sqlconn))
+                {
+                    using (SQLiteDataReader rdr2 = sqlcomm2.ExecuteReader())
+                        if (rdr2.Read())
+                        {
+                            newid = rdr2["idChar"].ToString() + rdr2["newid"].ToString();
+                        }
+                }
 
-select @id = idChar + CAST(incremnt as varchar) from idNumbers where idChar = 'S'
-update idNumbers set incremnt = incremnt + 1 where idChar = 'S'
+                if (newid == "")
+                {
+                    statusLable.Text = "Id genarate fail!";
+                    return;
+                }
+                sqlconn.Close();
 
+                string selectq = $@"
+ select id,[Lecture1],[Lecture2],[SubjectCode],[SubjectName]
+      ,[GroupID],[Tag],[NoOfStudent],[Duration],'{typename}' [Type],'{newid}' [newid] from Session where id in ({ String.Join(",", ids)}); ";
+
+                SQLiteCommand sqlcomm4 = new SQLiteCommand(selectq, sqlconn);
+                sqlconn.Open();
+
+                SQLiteDataReader reader = sqlcomm4.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    String sqlquery = $@"
 INSERT INTO sessionCat
            (LecID, Lecture1, Lecture2, SubjectCode, SubjectName
            , GroupID, Tag, NoOfStudent, Duration, Type, SessionID)
- select id,[Lecture1],[Lecture2],[SubjectCode],[SubjectName]
-      ,[GroupID],[Tag],[NoOfStudent],[Duration],'{typename}',@id from Session where id in ({String.Join(",", ids)})
+values(@ID,@Lecture1,@Lecture2,@SubjectCode,@SubjectName,@GroupID,@Tag,@NoOfStudent,@Duration,@Type,@SessionID);
    
-    select 'Insert success' [msg]
-end";
+";
 
-                SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn);
-                /*
-                sqlcomm.Parameters.AddWithValue("@ID", dr.Cells[2].Value);
-                sqlcomm.Parameters.AddWithValue("@Lecture1", dr.Cells[3].Value);
-                sqlcomm.Parameters.AddWithValue("@Lecture2", dr.Cells[4].Value);
-                sqlcomm.Parameters.AddWithValue("@SubjectCode", dr.Cells[5].Value);
-                sqlcomm.Parameters.AddWithValue("@SubjectName", dr.Cells[6].Value);
-                sqlcomm.Parameters.AddWithValue("@GroupID", dr.Cells[7].Value);
-                sqlcomm.Parameters.AddWithValue("@Tag", dr.Cells[8].Value);
-                sqlcomm.Parameters.AddWithValue("@NoOfStudent", dr.Cells[9].Value);
-                sqlcomm.Parameters.AddWithValue("@Duration", dr.Cells[10].Value);
-                sqlcomm.Parameters.AddWithValue("@Type", "Consecutive");
-                //sqlcomm.Parameters.AddWithValue("@SessionID", "CO"+ i);*/
+                    SQLiteCommand sqlcomm = new SQLiteCommand(sqlquery, sqlconn2);
 
+                    sqlcomm.Parameters.AddWithValue("@ID", reader["id"].ToString());
+                    sqlcomm.Parameters.AddWithValue("@Lecture1", reader["Lecture1"].ToString());
+                    sqlcomm.Parameters.AddWithValue("@Lecture2", reader["Lecture2"].ToString());
+                    sqlcomm.Parameters.AddWithValue("@SubjectCode", reader["SubjectCode"].ToString());
+                    sqlcomm.Parameters.AddWithValue("@SubjectName", reader["SubjectName"].ToString());
+                    sqlcomm.Parameters.AddWithValue("@GroupID", reader["GroupID"].ToString());
+                    sqlcomm.Parameters.AddWithValue("@Tag", reader["Tag"].ToString());
+                    sqlcomm.Parameters.AddWithValue("@NoOfStudent", reader["NoOfStudent"].ToString());
+                    sqlcomm.Parameters.AddWithValue("@Duration", reader["Duration"].ToString());
+                    sqlcomm.Parameters.AddWithValue("@Type", typename);
+                    sqlcomm.Parameters.AddWithValue("@SessionID",newid);
 
-                sqlconn.Open();
-                SqlTransaction tran = sqlconn.BeginTransaction();
-                sqlcomm.Transaction = tran; 
-                try
-                {
-                    
-                    using (SqlDataReader reader = sqlcomm.ExecuteReader())
-                        if (reader.Read())
-                        {
-                            statusLable.Text = reader["msg"].ToString(); 
-                        }
-                    tran.Commit();
+                    sqlconn2.Open();
 
-                }
-                catch (Exception ex1)
-                {
-                    if (tran != null)
-                        tran.Rollback();
-                }
-                finally
-                {
-                    sqlconn.Close();
+                  /*  SQLiteTransaction tran = sqlconn2.BeginTransaction();
+                    sqlcomm.Transaction = tran;
+                    try
+                    {
+                        sqlcomm.ExecuteReader();
+                        statusLable.Text = "Insert success";
+                        tran.Commit();
+                    }
+                    catch (Exception ex1)
+                    {
+                        if (tran != null)
+                            tran.Rollback();
+                    }
+                    finally
+                    {
+                        sqlconn2.Close();
+                    } */
                 }
             }
             catch (Exception ex)

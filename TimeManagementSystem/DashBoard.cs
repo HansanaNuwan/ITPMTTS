@@ -80,5 +80,15 @@ namespace TimeManagementSystem
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ManageNotAvailableTimes MN = new ManageNotAvailableTimes();
+
+            MN.Show();
+
+
+
+        }
     }
 }

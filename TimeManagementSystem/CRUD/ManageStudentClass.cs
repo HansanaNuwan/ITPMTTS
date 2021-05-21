@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.SQLite;
 
 namespace TimeManagementSystem.CRUD
 {
@@ -23,7 +23,7 @@ namespace TimeManagementSystem.CRUD
         public DataTable Select()
         {
             //DB connection
-            SqlConnection conn = new SqlConnection(myconnstrng);
+                        SQLiteConnection conn = new Classes.SqliteHelper().GetSQLiteConnection();
             DataTable dt = new DataTable();
 
             try
@@ -32,10 +32,10 @@ namespace TimeManagementSystem.CRUD
                 string sql = "Select * from StudentManage";
 
                 //creating cmd using sql and conn
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
 
                 //creating sql data adapted using cmd
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
 
                 conn.Open();
                 adapter.Fill(dt);
@@ -60,13 +60,13 @@ namespace TimeManagementSystem.CRUD
             bool isSuccess = false;
 
             //connect db
-            SqlConnection conn = new SqlConnection(myconnstrng);
+                        SQLiteConnection conn = new Classes.SqliteHelper().GetSQLiteConnection();
             try
             {
                 //sql to insert data
                 string sql = "Insert into StudentManage (AcademicYearSemester, Programme ,GroupNo,SubGroupNo ,GroupID , SubGroupID) values (@AcademicYearSemester, @Programme ,@GroupNo,@SubGroupNo ,@GroupID , @SubGroupID)";
                 //creating sql using sql and conn
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
                 //create parameters to add data
                 cmd.Parameters.AddWithValue("@AcademicYearSemester", m.AcademicYearSemester);
                 cmd.Parameters.AddWithValue("@Programme", m.Program);
@@ -110,14 +110,14 @@ namespace TimeManagementSystem.CRUD
             //default return type and set its value to false
             bool isSuccess = false;
 
-            SqlConnection conn = new SqlConnection(myconnstrng);
+                        SQLiteConnection conn = new Classes.SqliteHelper().GetSQLiteConnection();
             try
             {
                 //sql to update data
                 string sql = "Update StudentManage set AcademicYearSemester = @AcademicYearSemester, Programme = @Programme ,GroupNo = @GroupNo,SubGroupNo = @SubGroupNo ,GroupID = @GroupID , SubGroupID = @SubGroupID where ID = @ID ";
 
                 //sql
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
 
                 //create parameters to add value
                 cmd.Parameters.AddWithValue("@AcademicYearSemester", m.AcademicYearSemester);
@@ -162,14 +162,14 @@ namespace TimeManagementSystem.CRUD
             //create a default retun value and set it value to false
             bool isSuccess = false;
             //create sql connection
-            SqlConnection conn = new SqlConnection(myconnstrng);
+                        SQLiteConnection conn = new Classes.SqliteHelper().GetSQLiteConnection();
             try
             {
                 //sql to delete data
                 string sql = "Delete from StudentManage where ID = @ID";
 
                 //creating sql command
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@ID", m.ID);
                 //open connection
                 conn.Open();

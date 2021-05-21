@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -25,7 +25,7 @@ namespace TimeManagementSystem
         public DataTable SelectSessions(String session)
         {
             //DB connection
-            SqlConnection conn = new SqlConnection(connString);
+            SQLiteConnection conn = new Classes.SqliteHelper().GetSQLiteConnection();
             DataTable dt = new DataTable();
 
             try
@@ -34,10 +34,10 @@ namespace TimeManagementSystem
                 string sql = "Select * from sessionCat where Type = @session";
 
                 //creating cmd using sql and conn
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@session", session);
                 //creating sql data adapted using cmd
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
 
                 conn.Open();
                 adapter.Fill(dt);
@@ -60,7 +60,7 @@ namespace TimeManagementSystem
         {
             SelectedSessionType = session;
             //DB connection
-            SqlConnection conn = new SqlConnection(connString);
+                        SQLiteConnection conn = new Classes.SqliteHelper().GetSQLiteConnection();
             DataTable dt = new DataTable();
 
             try
@@ -69,10 +69,10 @@ namespace TimeManagementSystem
                 string sql = "Select * from sessionCat where Type = @session";
 
                 //creating cmd using sql and conn
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@session", session.ToString());
                 //creating sql data adapted using cmd
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
 
                 conn.Open();
                 adapter.Fill(dt);
@@ -140,7 +140,7 @@ namespace TimeManagementSystem
                 {
                     //delete
 
-                     SqlConnection conn = new SqlConnection(connString);
+                                 SQLiteConnection conn = new Classes.SqliteHelper().GetSQLiteConnection();
                      DataTable dt = new DataTable();
 
                      try   
@@ -150,7 +150,7 @@ namespace TimeManagementSystem
                          string sql = "Delete sessionCat where sessionID = @sessionID";
 
                          //creating cmd using sql and conn
-                         SqlCommand cmd = new SqlCommand(sql, conn);
+                         SQLiteCommand cmd = new SQLiteCommand(sql, conn);
                         cmd.Parameters.AddWithValue("@sessionID", sessionID);
                         conn.Open();
                         cmd.ExecuteNonQuery();

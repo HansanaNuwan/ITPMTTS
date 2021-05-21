@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -143,8 +143,8 @@ namespace TimeManagementSystem
         {
             //get tha value from textBox
             string keyword = txtSearch.Text;
-            SqlConnection conn = new SqlConnection(myconnstrng);
-            SqlDataAdapter sda = new SqlDataAdapter("Select * from Session where Lecture1 LIKE '%" + keyword + "%' OR SubjectCode LIKE '%" + keyword + "%' OR SubjectName LIKE '%" + keyword + "%'", conn);
+            SQLiteConnection conn = new Classes.SqliteHelper().GetSQLiteConnection();
+            SQLiteDataAdapter sda = new SQLiteDataAdapter("Select * from Session where Lecture1 LIKE '%" + keyword + "%' OR SubjectCode LIKE '%" + keyword + "%' OR SubjectName LIKE '%" + keyword + "%'", conn);
             DataTable dt = new DataTable();
             sda.Fill(dt);
             dataGridView1.DataSource = dt;
@@ -154,8 +154,8 @@ namespace TimeManagementSystem
         {
             //get tha value from textBox
             string keyword = txtSearch.Text;
-            SqlConnection conn = new SqlConnection(myconnstrng);
-            SqlDataAdapter sda = new SqlDataAdapter("Select * from Session where Lecture1 LIKE '%" + keyword + "%' OR SubjectCode LIKE '%" + keyword + "%' OR SubjectName LIKE '%" + keyword + "%'", conn);
+            SQLiteConnection conn = new Classes.SqliteHelper().GetSQLiteConnection();
+            SQLiteDataAdapter sda = new SQLiteDataAdapter("Select * from Session where Lecture1 LIKE '%" + keyword + "%' OR SubjectCode LIKE '%" + keyword + "%' OR SubjectName LIKE '%" + keyword + "%'", conn);
             DataTable dt = new DataTable();
             sda.Fill(dt);
             dataGridView1.DataSource = dt;

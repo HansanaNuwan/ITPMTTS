@@ -7,21 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
+using System.Data.SQLite;
 
 namespace TimeManagementSystem
 {
     public partial class ManageNotAvailableTimes : Form
     {
-        SqlConnection connection;
+        SQLiteConnection connection;
         private string id = "0"; 
 
         public ManageNotAvailableTimes()
         {
             InitializeComponent();
 
-            connection = new SqlConnection(
-                Classes.ConnectionStrings.ABCDatabase);
+            connection = new Classes.SqliteHelper().GetSQLiteConnection();
 
         }
 
@@ -42,8 +41,8 @@ namespace TimeManagementSystem
             try
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand("SELECT *  FROM dbo.[NotAvailableTime] ;", connection);
-                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                SQLiteCommand command = new SQLiteCommand("SELECT *  FROM [NotAvailableTime] ;", connection);
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
 
                 dgvResultNAT.DataSource = null;
                 dgvResultNAT.Rows.Clear();
@@ -141,7 +140,7 @@ namespace TimeManagementSystem
                 else
                 {
                     connection.Open();
-                    SqlCommand command = new SqlCommand("DELETE FROM dbo.[NotAvailableTime]  WHERE ID='" + id + "';", connection);
+                    SQLiteCommand command = new SQLiteCommand("DELETE FROM [NotAvailableTime]  WHERE ID='" + id + "';", connection);
 
                     int x = command.ExecuteNonQuery();
 

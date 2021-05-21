@@ -7,20 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
+using System.Data.SQLite;
 
 namespace TimeManagementSystem
 {
     public partial class SessionAndNATManagement : Form
     {
-        SqlConnection connection;
+        SQLiteConnection connection;
 
         public SessionAndNATManagement()
         {
             InitializeComponent();
 
-            connection = new SqlConnection(
-                Classes.ConnectionStrings.ABCDatabase);
+            connection = new Classes.SqliteHelper().GetSQLiteConnection();
 
             dtpDateandTime.MinDate = DateTime.Now;
 
@@ -51,7 +50,7 @@ namespace TimeManagementSystem
             try
             {
                 connection.Open();
-                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT Name FROM Lecturer", connection);
+                SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("SELECT Name FROM Lecturer", connection);
                 DataTable dataTable = new DataTable();
                 dataAdapter.Fill(dataTable);
                 dataTable.Rows.Add("None");
@@ -71,7 +70,7 @@ namespace TimeManagementSystem
             try
             {
                 connection.Open();
-                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT Group_ID FROM dbo.[Group]", connection);
+                SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("SELECT Group_ID FROM [Group]", connection);
                 DataTable dataTable = new DataTable();
                 dataAdapter.Fill(dataTable);
                 cmbSelectGroup.DataSource = dataTable;
@@ -90,7 +89,7 @@ namespace TimeManagementSystem
             try
             {
                 connection.Open();
-                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT Sub_Group_ID FROM dbo.[Group]", connection);
+                SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("SELECT Sub_Group_ID FROM [Group]", connection);
                 DataTable dataTable = new DataTable();
                 dataAdapter.Fill(dataTable);
                 cmbSelectSubGroup.DataSource = dataTable;
@@ -109,7 +108,7 @@ namespace TimeManagementSystem
             try
             {
                 connection.Open();
-                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT ID FROM Session", connection);
+                SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("SELECT ID FROM Session", connection);
                 DataTable dataTable = new DataTable();
                 dataAdapter.Fill(dataTable); 
                 dataTable.Rows.Add(00);
@@ -186,7 +185,7 @@ namespace TimeManagementSystem
                     }
 
                     connection.Open();
-                    SqlCommand command = new SqlCommand("INSERT INTO  dbo.[NotAvailableTime] (Duration, Lecturer, Group_ID, Sub_Group_ID, Session_ID) " + " VALUES ('" + dateAndTime + "','" + cmbSelectLecturer.Text + "','" + cmbSelectGroup.Text + "','" + cmbSelectSubGroup.Text + "','" + sessionID + "')", connection);
+                    SQLiteCommand command = new SQLiteCommand("INSERT INTO  [NotAvailableTime] (Duration, Lecturer, Group_ID, Sub_Group_ID, Session_ID) " + " VALUES ('" + dateAndTime + "','" + cmbSelectLecturer.Text + "','" + cmbSelectGroup.Text + "','" + cmbSelectSubGroup.Text + "','" + sessionID + "')", connection);
 
                     int x = command.ExecuteNonQuery();
 

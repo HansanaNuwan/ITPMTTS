@@ -7,20 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
+using System.Data.SQLite;
 
 namespace TimeManagementSystem
 {
     public partial class AddRoom : Form
     {
-        SqlConnection connection;
+        SQLiteConnection connection;
 
         public AddRoom()
         {
             InitializeComponent();
 
-            connection = new SqlConnection(
-                Classes.ConnectionStrings.ABCInstituteDB);
+            connection = new Classes.SqliteHelper().GetSQLiteConnection();
 
         }
 
@@ -57,8 +56,8 @@ namespace TimeManagementSystem
             try
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand("SELECT *  FROM dbo.[Session] ;", connection);
-                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                SQLiteCommand command = new SQLiteCommand("SELECT *  FROM [Session] ;", connection);
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
 
                 dgvShowResult.DataSource = null;
                 dgvShowResult.Rows.Clear();
@@ -122,9 +121,12 @@ namespace TimeManagementSystem
             {
                 connection.Open();
                
-                SqlCommand command = new SqlCommand("SELECT S.ID, S.Lecturer_1, S.Lecturer_2, S.Subject_Code, S.Subject_Name, S.Group_ID, S.Tag, S.Student_Count, S.Duration, S.Room FROM Session AS S LEFT JOIN TagOrder O ON O.Tag = S.Tag WHERE S.Subject_Name IN (SELECT Subject_Name  FROM Session GROUP BY Subject_Name HAVING COUNT(*) > 1 ) ORDER BY O.OrderNo; ", connection);
+                SQLiteCommand command = new SQLiteCommand(@"SELECT S.ID, S.Lecture1 as Lecturer_1, S.Lecture2 as Lecturer_2, S.SubjectCode as Subject_Code, S.SubjectName as Subject_Name
+, S.GroupID as Group_ID, S.Tag, S.NoOfStudent as Student_Count, S.Duration, S.Room FROM Session AS S LEFT JOIN TagOrder O ON O.Tag = S.Tag WHERE S.SubjectName IN
+(SELECT SubjectName  FROM Session GROUP BY SubjectName HAVING COUNT(*) > 1) ORDER BY O.OrderNo;
+                ", connection);
 
-                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
 
                 dgvShowResult2.DataSource = null;
                 dgvShowResult2.Rows.Clear();

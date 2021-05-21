@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-
+using System.Data.SQLite;
 namespace TimeManagementSystem
 {
     public partial class AddLocations : Form
@@ -40,10 +40,11 @@ namespace TimeManagementSystem
                         roomType = "Laboratory";
                     }
 
-                    SqlConnection connection = new SqlConnection(Classes.ConnectionStrings.ABCInstituteDB);
+                    SQLiteConnection connection = new Classes.SqliteHelper().GetSQLiteConnection();
 
                     connection.Open();
-                    SqlCommand command = new SqlCommand("INSERT INTO  dbo.[Location](Building, Room, Room_Type, Capacity) " + " VALUES ('" + txtBuildingName.Text + "','" + txtRoomName.Text + "','" + roomType + "','" + txtCapacity.Text + "')", connection);
+                    SQLiteCommand command = 
+                        new SQLiteCommand("INSERT INTO  [Location](Building, Room, Room_Type, Capacity) " + " VALUES ('" + txtBuildingName.Text + "','" + txtRoomName.Text + "','" + roomType + "','" + txtCapacity.Text + "')",connection);
                    
                     int i = command.ExecuteNonQuery();
                     

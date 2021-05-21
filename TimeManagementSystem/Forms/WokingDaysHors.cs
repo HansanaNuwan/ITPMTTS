@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
+using System.Data.SQLite;
 
 namespace TimeManagementSystem
 {
@@ -63,13 +63,13 @@ namespace TimeManagementSystem
                 sunday = 1;
             }
 
-            SqlConnection con = new SqlConnection(Classes.ConnectionStrings.Database1);
+            SQLiteConnection con = new Classes.SqliteHelper().GetSQLiteConnection();
             // SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C: \Users\User\Desktop\Time Table MS\Time Table MS\Database1.mdf;Integrated Security=True");
             con.Open();
 
             String cmd = "INSERT INTO  [dbo].[WorkingDaysHours](NoOfWorkingDays, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, StartTime, StopTime) " + " VALUES ('" + numericUpDown1.Text + "','" + monday + "','" + tuesday + "','" + wednessday + "','" + thursday + "','" + friday + "','" + saturday + "','" + sunday + "','" + comboBox1.Text + "','" + comboBox2.Text + "')";
 
-            SqlCommand command = new SqlCommand(cmd, con);
+            SQLiteCommand command = new SQLiteCommand(cmd, con);
 
             int i = command.ExecuteNonQuery();
             if (i != 0)
@@ -100,17 +100,17 @@ namespace TimeManagementSystem
         {
             try
             {
-                SqlConnection con = new SqlConnection(Classes.ConnectionStrings.Database1);
+                SQLiteConnection con = new Classes.SqliteHelper().GetSQLiteConnection();
                 //SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C: \Users\User\Desktop\Time Table MS\Time Table MS\Database1.mdf; Integrated Security = True");
                 con.Open();
 
                 String cmd = "SELECT *  FROM [dbo].[WorkingDaysHours]";
-                SqlCommand command = new SqlCommand(cmd, con);
+                SQLiteCommand command = new SQLiteCommand(cmd, con);
 
                 dataGridView1.DataSource = null;
                 dataGridView1.Rows.Clear();
 
-                SqlDataAdapter dAdapter = new SqlDataAdapter(command);
+                SQLiteDataAdapter dAdapter = new SQLiteDataAdapter(command);
                 DataSet ds = new DataSet();
                 dAdapter.Fill(ds);
                 dataGridView1.ReadOnly = true;
@@ -264,14 +264,14 @@ namespace TimeManagementSystem
                 sunday = 1;
             }
 
-            SqlConnection con = new SqlConnection(Classes.ConnectionStrings.Database1);
+            SQLiteConnection con = new Classes.SqliteHelper().GetSQLiteConnection();
             // SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C: \Users\User\Desktop\Time Table MS\Time Table MS\Database1.mdf; Integrated Security = True");
             con.Open();
 
             String cmd = "UPDATE [dbo].[WorkingDaysHours] SET  NoOfWorkingDays='" + numericUpDown1.Text + "', Monday='" + monday + "', Tuesday='" + tuesday + "', Wednesday='" + wednessday + "',Thursday='" + thursday + "',Friday='" + friday + "' ,Saturday='" + saturday + "',Sunday='" + sunday + "' ,StartTime='" + comboBox1.Text + "' ,StopTime='" + comboBox2.Text + "' WHERE Id='" + ID + "';";
 
 
-            SqlCommand command = new SqlCommand(cmd, con);
+            SQLiteCommand command = new SQLiteCommand(cmd, con);
 
             int i = command.ExecuteNonQuery();
             if (i != 0)
@@ -306,13 +306,13 @@ namespace TimeManagementSystem
             var confirmResult = MessageBox.Show("Are you sure to delete this student Group ??", "Confirm Delete!!", MessageBoxButtons.YesNo);
             if (confirmResult == DialogResult.Yes)
             {
-                SqlConnection con = new SqlConnection(Classes.ConnectionStrings.Database1);
+                SQLiteConnection con = new Classes.SqliteHelper().GetSQLiteConnection();
                 //SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C: \Users\User\Desktop\Time Table MS\Time Table MS\Database1.mdf; Integrated Security = True");
                 con.Open();
 
                 String cmd = "DELETE  FROM [dbo].[WorkingDaysHours] WHERE Id='" + ID + "';";
 
-                SqlCommand command = new SqlCommand(cmd, con);
+                SQLiteCommand command = new SQLiteCommand(cmd, con);
 
                 int i = command.ExecuteNonQuery();
                 if (i != 0)

@@ -52,8 +52,6 @@ namespace TimeManagementSystem
             this.lblDash = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.dashboardImageUC1 = new TimeManagementSystem.DashboardImageUC();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -77,8 +75,6 @@ namespace TimeManagementSystem
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.button3, 0, 12);
-            this.tableLayoutPanel1.Controls.Add(this.button1, 0, 11);
             this.tableLayoutPanel1.Controls.Add(this.button2, 0, 10);
             this.tableLayoutPanel1.Controls.Add(this.btnStudent, 0, 9);
             this.tableLayoutPanel1.Controls.Add(this.btnTb, 0, 8);
@@ -122,8 +118,9 @@ namespace TimeManagementSystem
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(156, 43);
             this.button2.TabIndex = 25;
-            this.button2.Text = "pukauka";
+            this.button2.Text = "Not Availabe Time";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // btnStudent
             // 
@@ -385,35 +382,6 @@ namespace TimeManagementSystem
             this.dashboardImageUC1.Size = new System.Drawing.Size(773, 490);
             this.dashboardImageUC1.TabIndex = 0;
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Century", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(3, 542);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(156, 32);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Student";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.White;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Century", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.Black;
-            this.button3.Location = new System.Drawing.Point(3, 580);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(156, 30);
-            this.button3.TabIndex = 26;
-            this.button3.Text = "Student";
-            this.button3.UseVisualStyleBackColor = false;
-            // 
             // DashBoard
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -461,8 +429,6 @@ namespace TimeManagementSystem
         private System.Windows.Forms.Button btnMaximize;
         private System.Windows.Forms.Button btnMinimize;
         private System.Windows.Forms.Button btnDashboard;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
     }
 }

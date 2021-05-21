@@ -7,21 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
+using System.Data.SQLite;
 
 namespace TimeManagementSystem
 {
     public partial class Statics : Form
     {
-        SqlConnection connection;
+        SQLiteConnection connection;
         public int type;
 
         public Statics()
         {
             InitializeComponent();
 
-            connection = new SqlConnection(
-                Classes.ConnectionStrings.ABCInstituteDB);
+            connection = new Classes.SqliteHelper().GetSQLiteConnection();
 
         }
 
@@ -61,10 +60,10 @@ namespace TimeManagementSystem
 
             try
             {
-                SqlCommand command1 = new SqlCommand("SELECT COUNT(*) AS Counts, " + column + " FROM " + table + " GROUP BY " + column + ";", connection);
+                SQLiteCommand command1 = new SQLiteCommand("SELECT COUNT(*) AS Counts, " + column + " FROM " + table + " GROUP BY " + column + ";", connection);
                 connection.Open();
 
-                SqlDataReader read = command1.ExecuteReader();
+                SQLiteDataReader read = command1.ExecuteReader();
 
                 while (read.Read())
                 {
@@ -87,10 +86,10 @@ namespace TimeManagementSystem
 
             try
             {
-                SqlCommand command1 = new SqlCommand("SELECT Student_Count AS Counts, Subject_Name FROM Session;", connection);
+                SQLiteCommand command1 = new SQLiteCommand("SELECT Student_Count AS Counts, Subject_Name FROM Session;", connection);
                 connection.Open();
 
-                SqlDataReader read = command1.ExecuteReader();
+                SQLiteDataReader read = command1.ExecuteReader();
 
                 while (read.Read())
                 {

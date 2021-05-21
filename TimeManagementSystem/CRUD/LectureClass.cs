@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,15 +37,14 @@ namespace TimeManagementSystem.CRUD
         public string EndTime { get; set; }
 
 
-        static string myconnstrng = Classes.ConnectionStrings.TimeTableSystem;
+        static string myconnstrng = Classes.ConnectionStrings.TBMS;
 
         //selecting data from database
 
         public DataTable Select()
         {
             //database connection
-
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            SQLiteConnection conn = new Classes.SqliteHelper().GetSQLiteConnection();
 
             DataTable dt = new DataTable();
 
@@ -55,10 +54,10 @@ namespace TimeManagementSystem.CRUD
                 string sql = "Select * from Lecturer";
 
                 //creating cmd using sql and conn
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
 
                 //creating Sql Data Adapter using cmd
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
                 conn.Open();
                 adapter.Fill(dt);
             }
@@ -76,13 +75,13 @@ namespace TimeManagementSystem.CRUD
         //insertign Data into database
         public bool InsertLecturer(LectureClass L)
         {
-            string myconnstrng = Classes.ConnectionStrings.TimeTableSystem;
+            string myconnstrng = Classes.ConnectionStrings.TBMS;
 
             //creating a default return type and setting its value to false
             bool isSuccess = false;
 
             //connect database
-            SqlConnection conn = new SqlConnection(myconnstrng);
+                        SQLiteConnection conn = new Classes.SqliteHelper().GetSQLiteConnection();
 
             try
             {
@@ -91,7 +90,7 @@ namespace TimeManagementSystem.CRUD
 
                 //creating Sql command using sql and cmd
 
-                SqlCommand cmd = new SqlCommand(sql,conn);
+                SQLiteCommand cmd = new SQLiteCommand(sql,conn);
 
                 cmd.Parameters.AddWithValue("@EmployeeID", L.EmployeeID);
                 cmd.Parameters.AddWithValue("@LectureName", L.LectureName);
@@ -140,7 +139,7 @@ namespace TimeManagementSystem.CRUD
             //create a default return type and set its default values to false
 
             bool isSuccess = false;
-            SqlConnection conn = new SqlConnection(myconnstrng);
+                        SQLiteConnection conn = new Classes.SqliteHelper().GetSQLiteConnection();
 
             try
             {
@@ -149,7 +148,7 @@ namespace TimeManagementSystem.CRUD
                 string sql = "Update Lecturer SET EmployeeID = @EmployeeID, LectureName = @LectureName, Faculty = @Faculty, Department =@Department, Center = @Center, Building = @Building, Level = @Level, Rank = @Rank, SelectDay = @SelectDay, StartTime = @StartTime, EndTime = @EndTime where EmployeeID = @EmployeeID";
 
                 //creating sql command
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
 
                 //create parametrs to add value
 
@@ -202,7 +201,7 @@ namespace TimeManagementSystem.CRUD
 
             //creating Sql connection
 
-            SqlConnection conn = new SqlConnection(myconnstrng);
+                        SQLiteConnection conn = new Classes.SqliteHelper().GetSQLiteConnection();
 
             try
             {
@@ -211,7 +210,7 @@ namespace TimeManagementSystem.CRUD
 
                 //creating Sql command
 
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@EmployeeID", L.EmployeeID);
 
                 //open connection

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.SQLite;
 
 namespace TimeManagementSystem.CRUD
 {
@@ -22,7 +22,7 @@ namespace TimeManagementSystem.CRUD
         public DataTable Select()
         {
             //step 1 : DB connection
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            SQLiteConnection conn = new Classes.SqliteHelper().GetSQLiteConnection();
             DataTable dt = new DataTable();
             try
             {
@@ -30,10 +30,10 @@ namespace TimeManagementSystem.CRUD
                 string sql = "select * from ManageTag";
 
                 //creating cmd usin sql and conn
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
 
                 //creating sql data adapter using cmd
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
                 conn.Open();
                 adapter.Fill(dt);
 
@@ -58,13 +58,13 @@ namespace TimeManagementSystem.CRUD
             bool isSuccess = false;
 
             //step 1 : connect database
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            SQLiteConnection conn = new Classes.SqliteHelper().GetSQLiteConnection();
             try
             {
                 //sql query to insert data
                 string sql = "Insert into ManageTag (SubjectName , SubjectCode , RelatedTag) values ( @SubjectName , @SubjectCode , @RelatedTag)";
                 //creating cmd usin sql and conn
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
 
                 //create parameters to add data
                 cmd.Parameters.AddWithValue("@SubjectName", c.TagName);
@@ -104,14 +104,14 @@ namespace TimeManagementSystem.CRUD
             //create a default return type and set its value to false
             bool isSuccess = false;
 
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            SQLiteConnection conn = new Classes.SqliteHelper().GetSQLiteConnection();
             try
             {
                 //sql to update data in database
                 string sql = "Update ManageTag set SubjectName =@SubjectName , SubjectCode =@SubjectCode , RelatedTag=@RelatedTag where TagID =@TagID";
 
                 //creating sql command
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
 
                 //create parameters to add values
                 cmd.Parameters.AddWithValue("@SubjectName", c.TagName);
@@ -151,14 +151,14 @@ namespace TimeManagementSystem.CRUD
             //default return value and set if false
             bool isSuccess = false;
             //create sql connection
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            SQLiteConnection conn = new Classes.SqliteHelper().GetSQLiteConnection();
             try
             {
                 //sql to delete data
                 string sql = "Delete from ManageTag where TagID = @TagID";
 
                 //creating sql command
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@TagID", c.TagID);
 
                 //open connection

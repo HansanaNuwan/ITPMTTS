@@ -1142,7 +1142,7 @@ SELECT ID, LecID, Lecture1, Lecture2, SubjectCode, SubjectName, GroupID, Tag, No
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ID, LecID, Lecture1, Lecture2, SubjectCode, SubjectName, GroupID, Tag, NoO" +
-                "fStudent, Duration, Type, SessionID FROM dbo.sessionCat";
+                "fStudent, Duration, Type, SessionID FROM sessionCat";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         

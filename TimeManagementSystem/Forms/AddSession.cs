@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,7 +19,8 @@ namespace TimeManagementSystem
             InitializeComponent();
         }
 
-        SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-4IVBI7U\SQLEXPRESS;Initial Catalog=TBMS;Integrated Security=True;");
+        SQLiteConnection con = new Classes.SqliteHelper().GetSQLiteConnection();
+
         SessionClass S = new SessionClass();
 
         //public String Lecture1, Lecture2, SubjectCode, SubjectName, GroupID, Tag, NoOfStudent, Duration;
@@ -133,8 +134,8 @@ namespace TimeManagementSystem
         public void fillcmbSelectLec()
         {
             con.Open();
-            SqlCommand cmd = new SqlCommand("select LectureName from Lecturer", con);
-            SqlDataReader rdr;
+            SQLiteCommand cmd = new SQLiteCommand("select LectureName from Lecturer", con);
+            SQLiteDataReader rdr;
             rdr = cmd.ExecuteReader();
             DataTable dt = new DataTable();
             dt.Columns.Add("LectureName", typeof(string));
@@ -147,8 +148,8 @@ namespace TimeManagementSystem
         public void fillcmbSelectSub()
         {
             con.Open();
-            SqlCommand cmd = new SqlCommand("select SubjectName from Subject", con);
-            SqlDataReader rdr;
+            SQLiteCommand cmd = new SQLiteCommand("select SubjectName from Subject", con);
+            SQLiteDataReader rdr;
             rdr = cmd.ExecuteReader();
             DataTable dt = new DataTable();
             dt.Columns.Add("SubjectName", typeof(string));
@@ -161,8 +162,8 @@ namespace TimeManagementSystem
         public void filltxtSubCode()
         {
             con.Open();
-            SqlCommand cmd = new SqlCommand("select SubjectCode from Subject", con);
-            SqlDataReader rdr;
+            SQLiteCommand cmd = new SQLiteCommand("select SubjectCode from Subject", con);
+            SQLiteDataReader rdr;
             rdr = cmd.ExecuteReader();
             DataTable dt = new DataTable();
             dt.Columns.Add("SubjectCode", typeof(string));

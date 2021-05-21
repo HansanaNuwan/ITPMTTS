@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,7 +34,7 @@ namespace TimeManagementSystem.CRUD
         public DataTable Select()
         {
             //database connection
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            SQLiteConnection conn = new Classes.SqliteHelper().GetSQLiteConnection();
 
             DataTable dt = new DataTable();
 
@@ -44,10 +44,10 @@ namespace TimeManagementSystem.CRUD
                 string sql = "Select * from Subject";
 
                 //creating cmd using sql and conn
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
 
                 //creating Sql Data Adapter using cmd
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
                 conn.Open();
                 adapter.Fill(dt);
             }
@@ -70,7 +70,7 @@ namespace TimeManagementSystem.CRUD
             bool isSuccess = false;
 
             //connect database
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            SQLiteConnection conn = new Classes.SqliteHelper().GetSQLiteConnection();
 
             try
             {
@@ -79,7 +79,7 @@ namespace TimeManagementSystem.CRUD
 
                 //creatng a Sql command using sql and cmd
 
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
 
                 cmd.Parameters.AddWithValue("@OfferdYear", s.OfferdYear);
                 cmd.Parameters.AddWithValue("@OfferdSemester", s.OfferdSemester);
@@ -125,13 +125,13 @@ namespace TimeManagementSystem.CRUD
             //create a default return type and set its default values to false
 
             bool isSuccess = false;
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            SQLiteConnection conn = new Classes.SqliteHelper().GetSQLiteConnection();
 
             try
             {
                 string sql = "update Subject set OfferdYear = @OfferdYear, OfferdSemester = @OfferdSemester, SubjectName = @SubjectName, SubjectCode = @SubjectCode, NoOfLectureHours = @NoOfLectureHours, NoOfTutorilaHours = @NoOfTutorialHours,NoOfLabHours = @NoOfLabHours, NoOfEvaluationHours = @NoOfEvaluationHours where SubjectCode = @SubjectCode";
 
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
 
                 //create paramters to add values
 
@@ -178,7 +178,7 @@ namespace TimeManagementSystem.CRUD
 
             //creating Sql connection
 
-            SqlConnection conn = new SqlConnection(myconnstrng);
+            SQLiteConnection conn = new Classes.SqliteHelper().GetSQLiteConnection();
 
 
             try
@@ -189,7 +189,7 @@ namespace TimeManagementSystem.CRUD
 
                 //creating sql command
 
-                SqlCommand cmd = new SqlCommand(sql, conn);
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@SubjectCode", s.SubjectCode);
 
                 //open connection

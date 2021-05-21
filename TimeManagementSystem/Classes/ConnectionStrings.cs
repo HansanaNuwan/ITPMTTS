@@ -48,5 +48,16 @@ namespace TimeManagementSystem.Classes
 ";Integrated Security=True";
             }
         }
+
+             public static String TBMS
+        {
+            get
+            {
+                return
+@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + System.IO.Path.Combine(Application.StartupPath, "Data\\TBMS.mdf") +
+";Integrated Security=True";
+            }
+
+        }
     }
 }

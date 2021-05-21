@@ -7,20 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
+using System.Data.SQLite;
 
 namespace TimeManagementSystem
 {
     public partial class Visualize : Form
     {
-        SqlConnection connection;
+        SQLiteConnection connection;
 
         public Visualize()
         {
             InitializeComponent();
 
-            connection = new SqlConnection(
-                Classes.ConnectionStrings.ABCInstituteDB);
+            connection = new Classes.SqliteHelper().GetSQLiteConnection();
         }
 
         private void Visualize_Load(object sender, EventArgs e)
@@ -46,10 +45,10 @@ namespace TimeManagementSystem
         {
             try
             {
-                SqlCommand command1 = new SqlCommand("SELECT COUNT(*) FROM dbo.[Lecturer] ;", connection);
-                SqlCommand command2 = new SqlCommand("SELECT SUM (Student_Count) FROM dbo.[Session] ;", connection);
-                SqlCommand command3 = new SqlCommand("SELECT COUNT(*) FROM dbo.[Subject] ;", connection);
-                SqlCommand command4 = new SqlCommand("SELECT COUNT(*) FROM dbo.[Location] ;", connection);
+                SQLiteCommand command1 = new SQLiteCommand("SELECT COUNT(*) FROM [Lecturer] ;", connection);
+                SQLiteCommand command2 = new SQLiteCommand("SELECT SUM (Student_Count) FROM [Session] ;", connection);
+                SQLiteCommand command3 = new SQLiteCommand("SELECT COUNT(*) FROM [Subject] ;", connection);
+                SQLiteCommand command4 = new SQLiteCommand("SELECT COUNT(*) FROM [Location] ;", connection);
                 connection.Open();
                 int countLectures = Convert.ToInt32(command1.ExecuteScalar());
                 int countStudents = Convert.ToInt32(command2.ExecuteScalar());
@@ -73,9 +72,9 @@ namespace TimeManagementSystem
         {
             try
             {
-                SqlCommand command1 = new SqlCommand("SELECT TOP(1) Name FROM dbo.[Lecturer] ORDER BY ID DESC ;", connection);
-                SqlCommand command2 = new SqlCommand("SELECT TOP(1) Name FROM dbo.[Group] ORDER BY ID DESC ;", connection);
-                SqlCommand command3 = new SqlCommand("SELECT TOP(1) Name FROM dbo.[Subject] ORDER BY ID DESC ;", connection);
+                SQLiteCommand command1 = new SQLiteCommand("SELECT TOP(1) Name FROM [Lecturer] ORDER BY ID DESC ;", connection);
+                SQLiteCommand command2 = new SQLiteCommand("SELECT TOP(1) Name FROM [Group] ORDER BY ID DESC ;", connection);
+                SQLiteCommand command3 = new SQLiteCommand("SELECT TOP(1) Name FROM [Subject] ORDER BY ID DESC ;", connection);
                 connection.Open();
                 string latestLectures = command1.ExecuteScalar().ToString();
                 string latestGroup = command2.ExecuteScalar().ToString();
@@ -98,10 +97,10 @@ namespace TimeManagementSystem
 
             try
             {
-                SqlCommand command1 = new SqlCommand("SELECT COUNT(*) AS Counts, Room_Type FROM Location GROUP BY Room_Type;", connection);
+                SQLiteCommand command1 = new SQLiteCommand("SELECT COUNT(*) AS Counts, Room_Type FROM Location GROUP BY Room_Type;", connection);
                 connection.Open();
 
-                SqlDataReader read = command1.ExecuteReader();
+                SQLiteDataReader read = command1.ExecuteReader();
 
                 while (read.Read())
                 {

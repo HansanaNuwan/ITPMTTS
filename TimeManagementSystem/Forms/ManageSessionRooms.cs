@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
+using System.Data.SQLite;
 
 namespace TimeManagementSystem
 {
     public partial class ManageSessionRooms : Form
     {
-        SqlConnection connection;
+        SQLiteConnection connection;
         private int id = 0;
         List<int> sessionID = new List<int>();
 
@@ -21,9 +21,8 @@ namespace TimeManagementSystem
         {
             InitializeComponent();
 
-            connection = new SqlConnection(
-                
-                Classes.ConnectionStrings.ABCInstituteDB);
+            connection = new Classes.SqliteHelper().GetSQLiteConnection();
+
 
         }
 
@@ -48,7 +47,7 @@ namespace TimeManagementSystem
         {
             try
             {
-                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT ID FROM Session", connection);
+                SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("SELECT ID FROM Session", connection);
                 DataTable dataTable = new DataTable();
                 dataAdapter.Fill(dataTable);
                 cmbSelectSession.DataSource = dataTable;
@@ -68,7 +67,7 @@ namespace TimeManagementSystem
         {
             try
             {
-                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT Room FROM Location", connection);
+                SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("SELECT Room FROM Location", connection);
                 DataTable dataTable = new DataTable();
                 dataAdapter.Fill(dataTable);
                 cmbSelectRoom.DataSource = dataTable;
@@ -115,10 +114,10 @@ namespace TimeManagementSystem
 
                     sessionID.Add(id);
 
-                    SqlCommand command1 = new SqlCommand("SELECT * FROM Session WHERE ID='" + id + "';", connection);
+                    SQLiteCommand command1 = new SQLiteCommand("SELECT * FROM Session WHERE ID='" + id + "';", connection);
                     connection.Open();
 
-                    SqlDataReader read = command1.ExecuteReader();
+                    SQLiteDataReader read = command1.ExecuteReader();
 
                     while (read.Read())
                     {
@@ -183,7 +182,7 @@ namespace TimeManagementSystem
 
                     for (int x = 1; x < sessionID.Count; x++)
                     {
-                        SqlCommand command = new SqlCommand("UPDATE Session SET Room='" + cmbSelectRoom.Text + "' WHERE ID='" + sessionID[x] + "';", connection);
+                        SQLiteCommand command = new SQLiteCommand("UPDATE Session SET Room='" + cmbSelectRoom.Text + "' WHERE ID='" + sessionID[x] + "';", connection);
 
                         int i = command.ExecuteNonQuery();
                         if( x == sessionID.Count - 1)

@@ -7,20 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
+using System.Data.SQLite;
 
 namespace TimeManagementSystem
 {
     public partial class ManageLocations : Form
     {
-        SqlConnection connection;
+        SQLiteConnection connection;
 
         public ManageLocations()
         {
             InitializeComponent();
 
-            connection = new SqlConnection(
-                Classes.ConnectionStrings.ABCInstituteDB);
+            connection = new Classes.SqliteHelper().GetSQLiteConnection();
 
         }
 
@@ -43,8 +42,8 @@ namespace TimeManagementSystem
             try
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand("SELECT *  FROM dbo.[Location] ;", connection);
-                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                SQLiteCommand command = new SQLiteCommand("SELECT *  FROM Location ;", connection);
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
 
                 dgvShowResult.DataSource = null;
                 dgvShowResult.Rows.Clear();
@@ -146,7 +145,7 @@ namespace TimeManagementSystem
                     }
 
                     connection.Open();
-                    SqlCommand command = new SqlCommand("UPDATE dbo.[Location] SET Building='" + txtBuildingName.Text + "', Room='" + txtRoomName.Text + "', Room_Type='" + roomType + "', Capacity='" + txtCapacity.Text + "' WHERE ID='" + txtLocationID.Text + "';", connection);
+                    SQLiteCommand command = new SQLiteCommand("UPDATE [Location] SET Building='" + txtBuildingName.Text + "', Room='" + txtRoomName.Text + "', Room_Type='" + roomType + "', Capacity='" + txtCapacity.Text + "' WHERE ID='" + txtLocationID.Text + "';", connection);
 
                     int i = command.ExecuteNonQuery();
                     if (i != 0)
@@ -184,7 +183,7 @@ namespace TimeManagementSystem
                 else
                 {
                     connection.Open();
-                    SqlCommand command = new SqlCommand("DELETE FROM dbo.[Location]  WHERE ID='" + txtLocationID.Text + "';", connection);
+                    SQLiteCommand command = new SQLiteCommand("DELETE FROM [Location]  WHERE ID='" + txtLocationID.Text + "';", connection);
 
                     int i = command.ExecuteNonQuery();
                     if (i != 0)
