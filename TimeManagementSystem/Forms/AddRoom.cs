@@ -73,25 +73,25 @@ namespace TimeManagementSystem
                     dgvShowResult.Columns[0].DataPropertyName = "ID";
 
                     dgvShowResult.Columns[1].HeaderText = "Lecturer 1";
-                    dgvShowResult.Columns[1].DataPropertyName = "Lecturer_1";
+                    dgvShowResult.Columns[1].DataPropertyName = "Lecture1";
 
                     dgvShowResult.Columns[2].HeaderText = "Lecturer 2";
-                    dgvShowResult.Columns[2].DataPropertyName = "Lecturer_2";
+                    dgvShowResult.Columns[2].DataPropertyName = "Lecture2";
 
                     dgvShowResult.Columns[3].HeaderText = "Subject Code";
-                    dgvShowResult.Columns[3].DataPropertyName = "Subject_Code";
+                    dgvShowResult.Columns[3].DataPropertyName = "SubjectCode";
 
                     dgvShowResult.Columns[4].HeaderText = "Subject Name";
-                    dgvShowResult.Columns[4].DataPropertyName = "Subject_Name";
+                    dgvShowResult.Columns[4].DataPropertyName = "SubjectName";
 
                     dgvShowResult.Columns[5].HeaderText = "Group ID";
-                    dgvShowResult.Columns[5].DataPropertyName = "Group_ID";
+                    dgvShowResult.Columns[5].DataPropertyName = "GroupID";
 
                     dgvShowResult.Columns[6].HeaderText = "Tag";
                     dgvShowResult.Columns[6].DataPropertyName = "Tag";
 
                     dgvShowResult.Columns[7].HeaderText = "Student Count";
-                    dgvShowResult.Columns[7].DataPropertyName = "Student_Count";
+                    dgvShowResult.Columns[7].DataPropertyName = "StudentCount";
 
                     dgvShowResult.Columns[8].HeaderText = "Duration";
                     dgvShowResult.Columns[8].DataPropertyName = "Duration";
@@ -121,8 +121,8 @@ namespace TimeManagementSystem
             {
                 connection.Open();
                
-                SQLiteCommand command = new SQLiteCommand(@"SELECT S.ID, S.Lecture1 as Lecturer_1, S.Lecture2 as Lecturer_2, S.SubjectCode as Subject_Code, S.SubjectName as Subject_Name
-, S.GroupID as Group_ID, S.Tag, S.NoOfStudent as Student_Count, S.Duration, S.Room FROM Session AS S LEFT JOIN TagOrder O ON O.Tag = S.Tag WHERE S.SubjectName IN
+                SQLiteCommand command = new SQLiteCommand(@"SELECT S.ID, S.Lecture1 as Lecture1, S.Lecture2 as Lecture2, S.SubjectCode as SubjectCode, S.SubjectName as SubjectName
+, S.GroupID as GroupID, S.Tag, S.NoOfStudent as StudentCount, S.Duration, S.Room FROM Session AS S LEFT JOIN TagOrder O ON O.Tag = S.Tag WHERE S.SubjectName IN
 (SELECT SubjectName  FROM Session GROUP BY SubjectName HAVING COUNT(*) > 1) ORDER BY O.OrderNo;
                 ", connection);
 
@@ -142,25 +142,25 @@ namespace TimeManagementSystem
                     dgvShowResult2.Columns[0].DataPropertyName = "ID";
 
                     dgvShowResult2.Columns[1].HeaderText = "Lecturer 1";
-                    dgvShowResult2.Columns[1].DataPropertyName = "Lecturer_1";
+                    dgvShowResult2.Columns[1].DataPropertyName = "Lecture1";
 
                     dgvShowResult2.Columns[2].HeaderText = "Lecturer 2";
-                    dgvShowResult2.Columns[2].DataPropertyName = "Lecturer_2";
+                    dgvShowResult2.Columns[2].DataPropertyName = "Lecture2";
 
                     dgvShowResult2.Columns[3].HeaderText = "Subject Code";
-                    dgvShowResult2.Columns[3].DataPropertyName = "Subject_Code";
+                    dgvShowResult2.Columns[3].DataPropertyName = "SubjectCode";
 
                     dgvShowResult2.Columns[4].HeaderText = "Subject Name";
-                    dgvShowResult2.Columns[4].DataPropertyName = "Subject_Name";
+                    dgvShowResult2.Columns[4].DataPropertyName = "SubjectName";
 
                     dgvShowResult2.Columns[5].HeaderText = "Group ID";
-                    dgvShowResult2.Columns[5].DataPropertyName = "Group_ID";
+                    dgvShowResult2.Columns[5].DataPropertyName = "GroupID";
 
                     dgvShowResult2.Columns[6].HeaderText = "Tag";
                     dgvShowResult2.Columns[6].DataPropertyName = "Tag";
 
                     dgvShowResult2.Columns[7].HeaderText = "Student Count";
-                    dgvShowResult2.Columns[7].DataPropertyName = "Student_Count";
+                    dgvShowResult2.Columns[7].DataPropertyName = "StudentCount";
 
                     dgvShowResult2.Columns[8].HeaderText = "Duration";
                     dgvShowResult2.Columns[8].DataPropertyName = "Duration";

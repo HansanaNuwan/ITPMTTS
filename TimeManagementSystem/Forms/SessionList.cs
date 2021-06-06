@@ -63,6 +63,11 @@ namespace TimeManagementSystem
 
         }
 
+        public class SessonData
+        {
+            public string id, lecture1, lecture2, SubjectCode, SubjectName, GroupID, Tag, NoOfStudents, Duration, Typename, NewId;
+        }
+
         void add(string typename)
         {
             List<String> ids = new List<string>();
@@ -86,7 +91,7 @@ namespace TimeManagementSystem
 
             // string connString = ConfigurationManager.ConnectionStrings["connstrng"].ConnectionString;
             SQLiteConnection sqlconn = new Classes.SqliteHelper().GetSQLiteConnection();
-            SQLiteConnection sqlconn2 = new Classes.SqliteHelper().GetSQLiteConnection();
+            // SQLiteConnection sqlconn2 = new Classes.SqliteHelper().GetSQLiteConnection();
 
 
 
@@ -123,18 +128,39 @@ update idNumbers set incremnt = incremnt + 1 where idChar = 'S';";
                     statusLable.Text = "Id genarate fail!";
                     return;
                 }
-                sqlconn.Close();
+                //sqlconn.Close();
 
                 string selectq = $@"
  select id,[Lecture1],[Lecture2],[SubjectCode],[SubjectName]
       ,[GroupID],[Tag],[NoOfStudent],[Duration],'{typename}' [Type],'{newid}' [newid] from Session where id in ({ String.Join(",", ids)}); ";
 
                 SQLiteCommand sqlcomm4 = new SQLiteCommand(selectq, sqlconn);
-                sqlconn.Open();
+                //sqlconn.Open();
 
-                SQLiteDataReader reader = sqlcomm4.ExecuteReader();
+                List<SessonData> ins_ids = new List<SessonData>();
+                using (SQLiteDataReader reader = sqlcomm4.ExecuteReader())
+                {
+                    ins_ids = new List<SessonData>();
+                    while (reader.Read())
+                    {
+                        ins_ids.Add(new SessonData()
+                        {
+                            id = reader["id"].ToString(),
+                            lecture1 = reader["Lecture1"].ToString(),
+                            lecture2 = reader["Lecture2"].ToString(),
+                            SubjectCode = reader["SubjectCode"].ToString(),
+                            SubjectName = reader["SubjectName"].ToString(),
+                            GroupID = reader["GroupID"].ToString(),
+                            Tag = reader["Tag"].ToString(),
+                            NoOfStudents = reader["NoOfStudent"].ToString(),
+                            Duration = reader["Duration"].ToString(),
+                            Typename = typename,
+                            NewId = newid
 
-                while (reader.Read())
+                        });
+                    }
+                }
+                foreach (SessonData ssdata in ins_ids)
                 {
                     String sqlquery = $@"
 INSERT INTO sessionCat
@@ -144,39 +170,42 @@ values(@ID,@Lecture1,@Lecture2,@SubjectCode,@SubjectName,@GroupID,@Tag,@NoOfStud
    
 ";
 
-                    SQLiteCommand sqlcomm = new SQLiteCommand(sqlquery, sqlconn2);
+                    SQLiteCommand sqlcomm = new SQLiteCommand(sqlquery, sqlconn);
 
-                    sqlcomm.Parameters.AddWithValue("@ID", reader["id"].ToString());
-                    sqlcomm.Parameters.AddWithValue("@Lecture1", reader["Lecture1"].ToString());
-                    sqlcomm.Parameters.AddWithValue("@Lecture2", reader["Lecture2"].ToString());
-                    sqlcomm.Parameters.AddWithValue("@SubjectCode", reader["SubjectCode"].ToString());
-                    sqlcomm.Parameters.AddWithValue("@SubjectName", reader["SubjectName"].ToString());
-                    sqlcomm.Parameters.AddWithValue("@GroupID", reader["GroupID"].ToString());
-                    sqlcomm.Parameters.AddWithValue("@Tag", reader["Tag"].ToString());
-                    sqlcomm.Parameters.AddWithValue("@NoOfStudent", reader["NoOfStudent"].ToString());
-                    sqlcomm.Parameters.AddWithValue("@Duration", reader["Duration"].ToString());
+                    sqlcomm.Parameters.AddWithValue("@ID", ssdata.id);
+                    sqlcomm.Parameters.AddWithValue("@Lecture1", ssdata.lecture1);
+                    sqlcomm.Parameters.AddWithValue("@Lecture2", ssdata.lecture2);
+                    sqlcomm.Parameters.AddWithValue("@SubjectCode", ssdata.SubjectCode);
+                    sqlcomm.Parameters.AddWithValue("@SubjectName", ssdata.SubjectName);
+                    sqlcomm.Parameters.AddWithValue("@GroupID", ssdata.GroupID);
+                    sqlcomm.Parameters.AddWithValue("@Tag", ssdata.Tag);
+                    sqlcomm.Parameters.AddWithValue("@NoOfStudent", ssdata.NoOfStudents);
+                    sqlcomm.Parameters.AddWithValue("@Duration", ssdata.Duration);
                     sqlcomm.Parameters.AddWithValue("@Type", typename);
-                    sqlcomm.Parameters.AddWithValue("@SessionID",newid);
+                    sqlcomm.Parameters.AddWithValue("@SessionID", newid);
 
-                    sqlconn2.Open();
+                    sqlcomm.ExecuteNonQuery();
 
-                  /*  SQLiteTransaction tran = sqlconn2.BeginTransaction();
-                    sqlcomm.Transaction = tran;
-                    try
-                    {
-                        sqlcomm.ExecuteReader();
-                        statusLable.Text = "Insert success";
-                        tran.Commit();
-                    }
-                    catch (Exception ex1)
-                    {
-                        if (tran != null)
-                            tran.Rollback();
-                    }
-                    finally
-                    {
-                        sqlconn2.Close();
-                    } */
+                    //sqlconn2.Open();
+
+                    /*  SQLiteTransaction tran = sqlconn2.BeginTransaction();
+                      sqlcomm.Transaction = tran;
+                      try
+                      {
+                          statusLable.Text = "Insert success";
+                          tran.Commit();
+                      }
+                      catch (Exception ex1)
+                      {
+                          if (tran != null)
+                              tran.Rollback();
+                      }
+                      finally
+                      {
+                          sqlconn2.Close();
+                      } */
+                    //}
+                    statusLable.Text = "Insert success";
                 }
             }
             catch (Exception ex)
@@ -190,7 +219,7 @@ values(@ID,@Lecture1,@Lecture2,@SubjectCode,@SubjectName,@GroupID,@Tag,@NoOfStud
         {
 
 
-            add("consecutive");
+            add("Consecutive");
 
 
 
@@ -230,6 +259,11 @@ values(@ID,@Lecture1,@Lecture2,@SubjectCode,@SubjectName,@GroupID,@Tag,@NoOfStud
                 
                 Sessions.GetSessions.Show(); 
             }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

@@ -102,7 +102,7 @@ namespace TimeManagementSystem
         private void btnCons_Click(object sender, EventArgs e)
         {
             SetSelectedButton(sender);
-            DataTable dt = SelectSessions(SessionType.consecutive);
+            DataTable dt = SelectSessions(SessionType.Consecutive);
             dataGridView1.DataSource = dt;
 
             label2.Text = "Consecutive Sessions";
@@ -112,7 +112,7 @@ namespace TimeManagementSystem
         {
             SetSelectedButton(sender);
          
-            DataTable dt = SelectSessions(SessionType.parallel);
+            DataTable dt = SelectSessions(SessionType.Parallel);
             dataGridView1.DataSource = dt;
 
            label2.Text = "Parallel Sessions";
@@ -147,7 +147,7 @@ namespace TimeManagementSystem
                      {
                        String sessionID = selected.Cells[11].Value.ToString();
                          //sql query
-                         string sql = "Delete sessionCat where sessionID = @sessionID";
+                         string sql = "Delete from sessionCat where sessionID = @sessionID";
 
                          //creating cmd using sql and conn
                          SQLiteCommand cmd = new SQLiteCommand(sql, conn);

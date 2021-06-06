@@ -1,4 +1,4 @@
 ﻿public enum SessionType
 {
-    consecutive, parallel, NonOverlapping
+    Consecutive, Parallel, NonOverlapping
 }

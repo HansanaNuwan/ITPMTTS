@@ -67,7 +67,7 @@ namespace TimeManagementSystem
             // SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C: \Users\User\Desktop\Time Table MS\Time Table MS\Database1.mdf;Integrated Security=True");
             con.Open();
 
-            String cmd = "INSERT INTO  [dbo].[WorkingDaysHours](NoOfWorkingDays, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, StartTime, StopTime) " + " VALUES ('" + numericUpDown1.Text + "','" + monday + "','" + tuesday + "','" + wednessday + "','" + thursday + "','" + friday + "','" + saturday + "','" + sunday + "','" + comboBox1.Text + "','" + comboBox2.Text + "')";
+            String cmd = "INSERT INTO  WorkingDaysHours (NoOfWorkingDays, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, StartTime, StopTime) " + " VALUES ('" + numericUpDown1.Text + "','" + monday + "','" + tuesday + "','" + wednessday + "','" + thursday + "','" + friday + "','" + saturday + "','" + sunday + "','" + comboBox1.Text + "','" + comboBox2.Text + "')";
 
             SQLiteCommand command = new SQLiteCommand(cmd, con);
 
@@ -104,7 +104,7 @@ namespace TimeManagementSystem
                 //SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C: \Users\User\Desktop\Time Table MS\Time Table MS\Database1.mdf; Integrated Security = True");
                 con.Open();
 
-                String cmd = "SELECT *  FROM [dbo].[WorkingDaysHours]";
+                String cmd = "SELECT *  FROM WorkingDaysHours";
                 SQLiteCommand command = new SQLiteCommand(cmd, con);
 
                 dataGridView1.DataSource = null;
@@ -268,7 +268,7 @@ namespace TimeManagementSystem
             // SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C: \Users\User\Desktop\Time Table MS\Time Table MS\Database1.mdf; Integrated Security = True");
             con.Open();
 
-            String cmd = "UPDATE [dbo].[WorkingDaysHours] SET  NoOfWorkingDays='" + numericUpDown1.Text + "', Monday='" + monday + "', Tuesday='" + tuesday + "', Wednesday='" + wednessday + "',Thursday='" + thursday + "',Friday='" + friday + "' ,Saturday='" + saturday + "',Sunday='" + sunday + "' ,StartTime='" + comboBox1.Text + "' ,StopTime='" + comboBox2.Text + "' WHERE Id='" + ID + "';";
+            String cmd = "UPDATE WorkingDaysHours SET  NoOfWorkingDays='" + numericUpDown1.Text + "', Monday='" + monday + "', Tuesday='" + tuesday + "', Wednesday='" + wednessday + "',Thursday='" + thursday + "',Friday='" + friday + "' ,Saturday='" + saturday + "',Sunday='" + sunday + "' ,StartTime='" + comboBox1.Text + "' ,StopTime='" + comboBox2.Text + "' WHERE Id='" + ID + "';";
 
 
             SQLiteCommand command = new SQLiteCommand(cmd, con);
@@ -310,7 +310,7 @@ namespace TimeManagementSystem
                 //SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = C: \Users\User\Desktop\Time Table MS\Time Table MS\Database1.mdf; Integrated Security = True");
                 con.Open();
 
-                String cmd = "DELETE  FROM [dbo].[WorkingDaysHours] WHERE Id='" + ID + "';";
+                String cmd = "DELETE  FROM WorkingDaysHours WHERE Id='" + ID + "';";
 
                 SQLiteCommand command = new SQLiteCommand(cmd, con);
 

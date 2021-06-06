@@ -50,13 +50,13 @@ namespace TimeManagementSystem
             try
             {
                 connection.Open();
-                SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("SELECT Name FROM Lecturer", connection);
+                SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("SELECT LectureName FROM Lecturer", connection);
                 DataTable dataTable = new DataTable();
                 dataAdapter.Fill(dataTable);
                 dataTable.Rows.Add("None");
                 cmbSelectLecturer.DataSource = dataTable;
-                cmbSelectLecturer.DisplayMember = "Name";
-                cmbSelectLecturer.ValueMember = "Name";
+                cmbSelectLecturer.DisplayMember = "LectureName";
+                cmbSelectLecturer.ValueMember = "LectureName";
                 connection.Close();
             }
             catch (Exception ex)
@@ -70,12 +70,12 @@ namespace TimeManagementSystem
             try
             {
                 connection.Open();
-                SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("SELECT Group_ID FROM [Group]", connection);
+                SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("select GroupID from Session", connection);
                 DataTable dataTable = new DataTable();
                 dataAdapter.Fill(dataTable);
                 cmbSelectGroup.DataSource = dataTable;
-                cmbSelectGroup.DisplayMember = "Group_ID";
-                cmbSelectGroup.ValueMember = "Group_ID";
+                cmbSelectGroup.DisplayMember = "GroupID";
+                cmbSelectGroup.ValueMember = "GroupID";
                 connection.Close();
             }
             catch (Exception ex)
@@ -89,12 +89,12 @@ namespace TimeManagementSystem
             try
             {
                 connection.Open();
-                SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("SELECT Sub_Group_ID FROM [Group]", connection);
+                SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter("select SubGroupID from StudentManage", connection);
                 DataTable dataTable = new DataTable();
                 dataAdapter.Fill(dataTable);
                 cmbSelectSubGroup.DataSource = dataTable;
-                cmbSelectSubGroup.DisplayMember = "Sub_Group_ID";
-                cmbSelectSubGroup.ValueMember = "Sub_Group_ID";
+                cmbSelectSubGroup.DisplayMember = "SubGroupID";
+                cmbSelectSubGroup.ValueMember = "SubGroupID";
                 connection.Close();
             }
             catch (Exception ex)
@@ -145,7 +145,7 @@ namespace TimeManagementSystem
             try
             {
                 if (cmbSelectLecturer.SelectedItem == null)
-                {
+               {
                     MessageBox.Show("No Lecturers in the System.", "Alert!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else if (cmbSelectGroup.SelectedItem == null)

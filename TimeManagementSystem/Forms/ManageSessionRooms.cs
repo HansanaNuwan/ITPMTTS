@@ -122,18 +122,18 @@ namespace TimeManagementSystem
                     while (read.Read())
                     {
                         
-                        string lecturer1 = read["Lecturer_1"].ToString();
-                        string lecturer2 = read["Lecturer_2"].ToString();
-                        string subCode = read["Subject_Code"].ToString();
-                        string subName = read["Subject_Name"].ToString();
-                        string grpID = read["Group_ID"].ToString();
+                        string lecture1 = read["Lecture1"].ToString();
+                        string lecture2 = read["Lecture2"].ToString();
+                        string subCode = read["SubjectCode"].ToString();
+                        string subName = read["SubjectName"].ToString();
+                        string grpID = read["GroupID"].ToString();
                         string tag = read["Tag"].ToString();
-                        int stCount = Convert.ToInt32(read["Student_Count"].ToString());
+                        int stCount = Convert.ToInt32(read["StudentCount"].ToString());
                         int duration = Convert.ToInt32(read["Duration"].ToString());
                         string room = read["Room"].ToString();
 
-                        lstBox.Items.Add("Lecturer 1 - " + lecturer1);
-                        lstBox.Items.Add("Lecturer 2 - " + lecturer2);
+                        lstBox.Items.Add("Lecturer 1 - " + lecture1);
+                        lstBox.Items.Add("Lecturer 2 - " + lecture2);
                         lstBox.Items.Add("Subject Code - " + subCode);
                         lstBox.Items.Add("Subject Name - " + subName);
                         lstBox.Items.Add("Group ID - " + grpID);
@@ -215,6 +215,11 @@ namespace TimeManagementSystem
         }
 
         private void lstBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbSelectRoom_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

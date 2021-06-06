@@ -30,9 +30,9 @@ namespace TimeManagementSystem
             {
                 if(type== 1)
                 {
-                    loadChartData("Lecturer", "Subject");
+                    loadChartData("Lecturer", "Faculty");
                     lblStatistics.Text = "Registerd Lecturers";
-                    this.chrtPie.Titles.Add("Registerd Lecturers By Subject");
+                    this.chrtPie.Titles.Add("Registerd Lecturers By Faculty");
                 }
                 else if(type == 2)
                 {
@@ -43,7 +43,7 @@ namespace TimeManagementSystem
                 }
                 else if (type == 3)
                 {
-                    loadChartData("Subject", "Offered_Year");
+                    loadChartData("Subject", "OfferdYear");
                     lblStatistics.Text = "Registerd Subjects";
                     this.chrtPie.Titles.Add("Registerd Subjects By Offered Year");
                 }
@@ -86,14 +86,14 @@ namespace TimeManagementSystem
 
             try
             {
-                SQLiteCommand command1 = new SQLiteCommand("SELECT Student_Count AS Counts, Subject_Name FROM Session;", connection);
+                SQLiteCommand command1 = new SQLiteCommand("SELECT StudentCount AS Counts, SubjectName FROM Session;", connection);
                 connection.Open();
 
                 SQLiteDataReader read = command1.ExecuteReader();
 
                 while (read.Read())
                 {
-                    string subjectName = read["Subject_Name"].ToString();
+                    string subjectName = read["SubjectName"].ToString();
 
                     int index = chrtPie.Series["Series1"].Points.AddY(Convert.ToInt32(read["Counts"].ToString()));
                     chrtPie.Series["Series1"].Points[index].Label = subjectName + " : #PERCENT{P2}";

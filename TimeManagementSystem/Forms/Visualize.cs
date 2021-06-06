@@ -45,10 +45,10 @@ namespace TimeManagementSystem
         {
             try
             {
-                SQLiteCommand command1 = new SQLiteCommand("SELECT COUNT(*) FROM [Lecturer] ;", connection);
-                SQLiteCommand command2 = new SQLiteCommand("SELECT SUM (Student_Count) FROM [Session] ;", connection);
-                SQLiteCommand command3 = new SQLiteCommand("SELECT COUNT(*) FROM [Subject] ;", connection);
-                SQLiteCommand command4 = new SQLiteCommand("SELECT COUNT(*) FROM [Location] ;", connection);
+                SQLiteCommand command1 = new SQLiteCommand("SELECT COUNT(*) FROM Lecturer ;", connection);
+                SQLiteCommand command2 = new SQLiteCommand("SELECT SUM (StudentCount) FROM Session ;", connection);
+                SQLiteCommand command3 = new SQLiteCommand("SELECT COUNT(*) FROM Subject;", connection);
+                SQLiteCommand command4 = new SQLiteCommand("SELECT COUNT(*) FROM Location;", connection);
                 connection.Open();
                 int countLectures = Convert.ToInt32(command1.ExecuteScalar());
                 int countStudents = Convert.ToInt32(command2.ExecuteScalar());
@@ -72,9 +72,9 @@ namespace TimeManagementSystem
         {
             try
             {
-                SQLiteCommand command1 = new SQLiteCommand("SELECT TOP(1) Name FROM [Lecturer] ORDER BY ID DESC ;", connection);
-                SQLiteCommand command2 = new SQLiteCommand("SELECT TOP(1) Name FROM [Group] ORDER BY ID DESC ;", connection);
-                SQLiteCommand command3 = new SQLiteCommand("SELECT TOP(1) Name FROM [Subject] ORDER BY ID DESC ;", connection);
+                SQLiteCommand command1 = new SQLiteCommand("SELECT LectureName as Name FROM Lecturer  ORDER BY EmployeeID DESC limit 1;", connection);
+                SQLiteCommand command2 = new SQLiteCommand("select GroupID as Name from StudentManage  ORDER BY ID DESC limit 1;", connection);
+                SQLiteCommand command3 = new SQLiteCommand("SELECT SubjectName as Name FROM Subject  ORDER BY ID DESC limit 1;", connection);
                 connection.Open();
                 string latestLectures = command1.ExecuteScalar().ToString();
                 string latestGroup = command2.ExecuteScalar().ToString();
